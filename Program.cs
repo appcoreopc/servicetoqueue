@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,6 +18,17 @@ namespace servicebuswriter
 
         static async Task Main(string[] args)
         {
+           var smtpClient = new SmtpClient("mail.smtp2go.com", 25);
+           var mailManager = new MailManager(smtpClient);
+
+           smtpClient.UseDefaultCredentials = false;
+           smtpClient.Credentials = new NetworkCredential("kepung@gmail.com", "yiGpoKsSkI8l");
+
+           Console.WriteLine("Sending emails ");
+           await mailManager.SendMail();
+           Console.WriteLine("Press any key to continue");
+           Console.ReadLine();
+
             var d = new DataMessage {
                 Name  = "jeremy" + DateTime.Now, 
                 Email = "kepung@gmail.com"
@@ -27,6 +40,9 @@ namespace servicebuswriter
             Console.WriteLine($"Send message. {d.Name}");
             await queueClient.CloseAsync();
         }
+
+
+
     }
 
     public class DataMessage
