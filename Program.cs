@@ -19,7 +19,7 @@ namespace servicebuswriter
         static async Task Main(string[] args)
         {
            var smtpClient = new SmtpClient("mail.smtp2go.com", 25);
-           var mailManager = new MailManager(smtpClient);
+           var mailManager = new MailManager(smtpClient, (s, e) => Console.Write("Sent!"));
 
            smtpClient.UseDefaultCredentials = false;
            smtpClient.Credentials = new NetworkCredential("kepung@gmail.com", "yiGpoKsSkI8l");

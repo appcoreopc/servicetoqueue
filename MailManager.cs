@@ -8,10 +8,12 @@
     class MailManager {
 
     private readonly SmtpClient _client; 
+    private readonly Action<object, AsyncCompletedEventArgs> _action; 
 
-    public MailManager(SmtpClient client)
+    public MailManager(SmtpClient client, Action<object, AsyncCompletedEventArgs> action)
     {
         this._client = client; 
+        this._action = action; 
     }
     
     public async Task SendMail() 
@@ -32,15 +34,14 @@
                 message.Subject = "test message 1" + someArrows;
                 message.SubjectEncoding = System.Text.Encoding.UTF8;
                 // Set the method that is called back when the send operation ends.
-                _client.SendCompleted += new SendCompletedEventHandler(SendCompletedCallback);
+                
+                if (this._action != null)
+                {
+                    _client.SendCompleted += new SendCompletedEventHandler(this._action);
+                }
 
                 string userState = "test message1";
                 _client.SendAsync(message, userState);
-        }
-
-        private void SendCompletedCallback(object sender, AsyncCompletedEventArgs e)
-        {
-            Console.WriteLine("Sent! ");
         }
     }
 
