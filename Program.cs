@@ -10,7 +10,7 @@ namespace servicebuswriter
 {
     class Program
     {
-        const string ServiceBusConnectionString = "";
+        const string ServiceBusConnectionString = "Endpoint=sb://devsbbank.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=ZeoCedTJSaqVPAx8bHX998DVIYHtuG5g0OKlUkUFF9g=";
         const string QueueName = "devsbqbank";
         static IQueueClient queueClient;
 
@@ -22,7 +22,6 @@ namespace servicebuswriter
             };
 
             queueClient = new QueueClient(ServiceBusConnectionString, QueueName);
-
             var qms = new QueueMessageSender(queueClient);
             await qms.SendMessagesAsync(MessageConverter.Serialize(d));
             Console.WriteLine($"Send message. {d.Name}");
