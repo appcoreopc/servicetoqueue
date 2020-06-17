@@ -16,10 +16,10 @@
         this._action = action; 
     }
     
-    public async Task SendMail() 
+    public async Task SendMailAsync() 
     {
-            MailAddress from = new MailAddress("test@contoso.com",
-                "Jane " + (char)0xD8+ " Clayton",
+            MailAddress from = new MailAddress("kepung@gmail.com",
+                "Jeremy " + (char)0xD8+ " Clayton",
                 System.Text.Encoding.UTF8);
 
             MailAddress to = new MailAddress("kepung@gmail.com");
@@ -41,8 +41,11 @@
                 }
 
                 string userState = "test message1";
-                _client.SendAsync(message, userState);
+                 _client.SendAsync(message, userState);
+
+             await Task.Delay(4000);
         }
+
     }
 
     class MailHelper
