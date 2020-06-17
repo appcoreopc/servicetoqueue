@@ -18,7 +18,7 @@ namespace servicebuswriter
 
         static async Task Main(string[] args)
         {
-            string to = "jeremy.woo@adaptiv.co.nz";
+            string to = "kepung@gmail.com";
             string from = "jeremy.woo@adaptiv.co.nz";
             string subject = "Using the new SMTP client.";
             string body = @"Using this new feature, you can send an email message from an application very easily.";
