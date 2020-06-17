@@ -18,9 +18,8 @@
     
     public async Task SendMailAsync() 
     {
-            MailAddress from = new MailAddress("kepung@gmail.com",
-                "Jeremy " + (char)0xD8+ " Clayton",
-                System.Text.Encoding.UTF8);
+            MailAddress from = new MailAddress("jeremy.woo@adaptiv.co.nz",
+                "Jeremy", System.Text.Encoding.UTF8);
 
             MailAddress to = new MailAddress("kepung@gmail.com");
                 // Specify the message content.
@@ -41,6 +40,8 @@
                 }
 
                 string userState = "test message1";
+                 
+                Console.WriteLine("Sendng mesages");
                  _client.SendAsync(message, userState);
 
              await Task.Delay(4000);
